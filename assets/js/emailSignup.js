@@ -1,7 +1,7 @@
 // Get the base URL depending on the environment
 const baseUrl = window.location.hostname === 'localhost' ? 
     'http://localhost:3000' : 
-    'https://your-deployed-backend-url'; // Replace with your deployed backend URL
+    'https://sripadaai.netlify.app/.netlify/functions/subscribe'; // Update with your Netlify function URL
 
 // Post email to your server-side endpoint
 document.getElementById("signup-form").addEventListener("submit", async function(event) {
@@ -10,7 +10,7 @@ document.getElementById("signup-form").addEventListener("submit", async function
     const email = document.getElementById("email").value;
 
     try {
-        const response = await fetch(`${baseUrl}/subscribe`, {
+        const response = await fetch(`${baseUrl}`, { // Only the base URL needed
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
