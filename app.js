@@ -25,7 +25,7 @@ async function startServer() {
             try {
                 const collection = db.collection('aggregated_signals');
                 const data = await collection.find({}).toArray();
-
+        
                 const predictionData = data.filter(item => item.data_type === 'prediction');
                 const truthData = data.filter(item => item.data_type === 'truth');
                 
@@ -51,7 +51,7 @@ async function startServer() {
                 });
             }
         });
-
+        
         app.listen(7878, () => {
             console.log('Server started on port 7878');
         });
@@ -61,3 +61,5 @@ async function startServer() {
 }
 
 startServer();
+
+
