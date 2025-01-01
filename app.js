@@ -25,18 +25,18 @@ async function startServer() {
             try {
                 const collection = db.collection('aggregated_signals');
                 const data = await collection.find({}).toArray();
-                
+
                 const predictionData = data.filter(item => item.data_type === 'prediction');
                 const truthData = data.filter(item => item.data_type === 'truth');
                 
                 if (data && data.length > 0) {
-                    res.render('index.ejs', { 
+                    res.render('index', {  // Rendering index.ejs (without .ejs extension)
                         predictionData,
                         truthData,
                         error: null 
                     });
                 } else {
-                    res.render('index.ejs', { 
+                    res.render('index', {  // Rendering index.ejs (without .ejs extension)
                         predictionData: null,
                         truthData: null,
                         error: 'No data found in the signals collection' 
@@ -44,7 +44,7 @@ async function startServer() {
                 }
             } catch (err) {
                 console.error('Error querying MongoDB:', err);
-                res.render('index.ejs', { 
+                res.render('index', { 
                     predictionData: null,
                     truthData: null,
                     error: 'Error querying database: ' + err.message 
