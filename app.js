@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const app = express();
 const uri = process.env.MONGODB_URI;//admin:admin@signals-output.ctl2i.mongodb.net/';
-const dbName = process.env.DB_NAME;;
+const dbName = process.env.MONGODB_DB;
 
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
