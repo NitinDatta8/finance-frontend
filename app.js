@@ -1,6 +1,8 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const path = require('path');
+const ejs = require('ejs');
+const fs = require('fs');
 
 const app = express();
 const uri = 'mongodb+srv://admin:admin@signals-output.ctl2i.mongodb.net/';
@@ -30,13 +32,22 @@ async function startServer() {
                 const truthData = data.filter(item => item.data_type === 'truth');
                 
                 if (data && data.length > 0) {
-                    res.render('index', {  // Rendering index.ejs (without .ejs extension)
+                    // Render index.ejs and save to public directory as index.html
+                    ejs.renderFile(path.join(__dirname, 'views', 'index.ejs'), {
                         predictionData,
                         truthData,
-                        error: null 
+                        error: null
+                    }, (err, str) => {
+                        if (err) {
+                            console.error('Error rendering EJS:', err);
+                            return res.status(500).send('Error rendering HTML');
+                        }
+                        // Save the HTML file to the 'public' folder
+                        fs.writeFileSync(path.join(__dirname, 'public', 'index.html'), str);
+                        res.send('HTML file generated successfully!');
                     });
                 } else {
-                    res.render('index', {  // Rendering index.ejs (without .ejs extension)
+                    res.render('index', {  
                         predictionData: null,
                         truthData: null,
                         error: 'No data found in the signals collection' 
@@ -61,5 +72,3 @@ async function startServer() {
 }
 
 startServer();
-
-
