@@ -1,2 +1,16 @@
+# Node.js dependencies
 node_modules/
+
+# .env file for environment variables (optional)
 .env
+
+# Logs and other temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Other sensitive files or folders

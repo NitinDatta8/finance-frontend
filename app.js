@@ -1,3 +1,5 @@
+require('dotenv').config();  // Add this at the top of your app.js
+
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const path = require('path');
@@ -5,8 +7,8 @@ const ejs = require('ejs');
 const fs = require('fs');
 
 const app = express();
-const uri = 'mongodb+srv://admin:admin@signals-output.ctl2i.mongodb.net/';
-const dbName = 'final-signals';
+const uri = process.env.MONGODB_URI;//admin:admin@signals-output.ctl2i.mongodb.net/';
+const dbName = process.env.DB_NAME;;
 
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
